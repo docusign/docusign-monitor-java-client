@@ -6,7 +6,7 @@
 ## Requirements
 
 - Java 1.9+
-- Free [Developer Account](https://go.docusign.com/sandbox/productshot/?elqCampaignId=16531)
+- Free [Developer Sandbox](https://go.docusign.com/sandbox/productshot/?elqCampaignId=16531)
 
 ## Compatibility
 
@@ -35,7 +35,7 @@ Note: DocuSign uses **Eclipse** with **Maven** for testing purposes.
 <dependency>
   <groupId>com.docusign</groupId>
   <artifactId>docusign-monitor-java</artifactId>
-  <version>1.0.0-BETA</version>
+  <version>1.0.0</version>
 </dependency>
 ```
 
@@ -64,7 +64,7 @@ This client has the following external dependencies:
 For details regarding which type of OAuth grant will work best for your DocuSign integration, see the [REST API
  Authentication Overview](https://developers.docusign.com/monitor-api/guides/auth) guide located on the [DocuSign Developer Center](https://developers.docusign.com/).
 
-Monitor API can only be used with JWT Auth.
+For security purposes, DocuSign recommends using the Authorization Code Grant flow.
 
 ## Support
 
