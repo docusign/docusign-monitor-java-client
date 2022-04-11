@@ -9,51 +9,51 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * CursoredResult.
+ * AggregateResultResult.
  *
  */
 
-public class CursoredResult {
-  @JsonProperty("endCursor")
-  private String endCursor = null;
+public class AggregateResultResult {
+  @JsonProperty("name")
+  private String name = null;
 
   @JsonProperty("data")
   private java.util.List<Object> data = null;
 
 
   /**
-   * endCursor.
+   * name.
    *
-   * @return CursoredResult
+   * @return AggregateResultResult
    **/
-  public CursoredResult endCursor(String endCursor) {
-    this.endCursor = endCursor;
+  public AggregateResultResult name(String name) {
+    this.name = name;
     return this;
   }
 
   /**
-   * Get endCursor.
-   * @return endCursor
+   * Get name.
+   * @return name
    **/
   @ApiModelProperty(value = "")
-  public String getEndCursor() {
-    return endCursor;
+  public String getName() {
+    return name;
   }
 
   /**
-   * setEndCursor.
+   * setName.
    **/
-  public void setEndCursor(String endCursor) {
-    this.endCursor = endCursor;
+  public void setName(String name) {
+    this.name = name;
   }
 
 
   /**
    * data.
    *
-   * @return CursoredResult
+   * @return AggregateResultResult
    **/
-  public CursoredResult data(java.util.List<Object> data) {
+  public AggregateResultResult data(java.util.List<Object> data) {
     this.data = data;
     return this;
   }
@@ -61,9 +61,9 @@ public class CursoredResult {
   /**
    * addDataItem.
    *
-   * @return CursoredResult
+   * @return AggregateResultResult
    **/
-  public CursoredResult addDataItem(Object dataItem) {
+  public AggregateResultResult addDataItem(Object dataItem) {
     if (this.data == null) {
       this.data = new java.util.ArrayList<Object>();
     }
@@ -101,9 +101,9 @@ public class CursoredResult {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CursoredResult cursoredResult = (CursoredResult) o;
-    return Objects.equals(this.endCursor, cursoredResult.endCursor) &&
-        Objects.equals(this.data, cursoredResult.data);
+    AggregateResultResult aggregateResultResult = (AggregateResultResult) o;
+    return Objects.equals(this.name, aggregateResultResult.name) &&
+        Objects.equals(this.data, aggregateResultResult.data);
   }
 
   /**
@@ -111,7 +111,7 @@ public class CursoredResult {
    */
   @Override
   public int hashCode() {
-    return Objects.hash(endCursor, data);
+    return Objects.hash(name, data);
   }
 
 
@@ -121,9 +121,9 @@ public class CursoredResult {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CursoredResult {\n");
+    sb.append("class AggregateResultResult {\n");
     
-    sb.append("    endCursor: ").append(toIndentedString(endCursor)).append("\n");
+    sb.append("    name: ").append(toIndentedString(name)).append("\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");
     sb.append("}");
     return sb.toString();
