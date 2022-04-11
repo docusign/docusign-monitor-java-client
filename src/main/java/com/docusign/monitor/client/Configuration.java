@@ -3,6 +3,10 @@
 package com.docusign.monitor.client;
 
 
+/**
+ * Configuration class.
+ *
+ **/
 public class Configuration {
     private static ApiClient defaultApiClient = new ApiClient();
 

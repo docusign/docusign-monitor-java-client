@@ -2,8 +2,6 @@ package com.docusign.monitor.model;
 
 import java.util.Objects;
 import java.util.Arrays;
-import com.docusign.monitor.model.Aggregation;
-import com.docusign.monitor.model.Filter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -11,25 +9,22 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 /**
- * WebQuery
+ * WebQuery.
+ *
  */
 
 public class WebQuery {
   @JsonProperty("filters")
-  private java.util.List<Filter> filters = null;
+  private java.util.List<Object> filters = null;
 
   @JsonProperty("aggregations")
-  private java.util.List<Aggregation> aggregations = null;
+  private java.util.List<Object> aggregations = null;
 
   /**
    * Gets or Sets queryScope
    */
   public enum QueryScopeEnum {
-    ACCOUNTID("AccountId"),
-    
-    ORGANIZATIONID("OrganizationId"),
-    
-    NONE("None");
+    ORGANIZATIONID("OrganizationId");
 
     private String value;
 
@@ -48,9 +43,9 @@ public class WebQuery {
     }
 
     @JsonCreator
-    public static QueryScopeEnum fromValue(String text) {
+    public static QueryScopeEnum fromValue(String value) {
       for (QueryScopeEnum b : QueryScopeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
+        if (b.value.equals(value)) {
           return b;
         }
       }
@@ -62,97 +57,148 @@ public class WebQuery {
   private QueryScopeEnum queryScope = null;
 
   @JsonProperty("queryScopeId")
-  private java.util.UUID queryScopeId = null;
+  private String queryScopeId = null;
 
-  public WebQuery filters(java.util.List<Filter> filters) {
+
+  /**
+   * filters.
+   *
+   * @return WebQuery
+   **/
+  public WebQuery filters(java.util.List<Object> filters) {
     this.filters = filters;
     return this;
   }
-
-  public WebQuery addFiltersItem(Filter filtersItem) {
+  
+  /**
+   * addFiltersItem.
+   *
+   * @return WebQuery
+   **/
+  public WebQuery addFiltersItem(Object filtersItem) {
     if (this.filters == null) {
-      this.filters = new java.util.ArrayList<Filter>();
+      this.filters = new java.util.ArrayList<Object>();
     }
     this.filters.add(filtersItem);
     return this;
   }
 
-   /**
-   * Get filters
+  /**
+   * Get filters.
    * @return filters
-  **/
+   **/
   @ApiModelProperty(value = "")
-  public java.util.List<Filter> getFilters() {
+  public java.util.List<Object> getFilters() {
     return filters;
   }
 
-  public void setFilters(java.util.List<Filter> filters) {
+  /**
+   * setFilters.
+   **/
+  public void setFilters(java.util.List<Object> filters) {
     this.filters = filters;
   }
 
-  public WebQuery aggregations(java.util.List<Aggregation> aggregations) {
+
+  /**
+   * aggregations.
+   *
+   * @return WebQuery
+   **/
+  public WebQuery aggregations(java.util.List<Object> aggregations) {
     this.aggregations = aggregations;
     return this;
   }
-
-  public WebQuery addAggregationsItem(Aggregation aggregationsItem) {
+  
+  /**
+   * addAggregationsItem.
+   *
+   * @return WebQuery
+   **/
+  public WebQuery addAggregationsItem(Object aggregationsItem) {
     if (this.aggregations == null) {
-      this.aggregations = new java.util.ArrayList<Aggregation>();
+      this.aggregations = new java.util.ArrayList<Object>();
     }
     this.aggregations.add(aggregationsItem);
     return this;
   }
 
-   /**
-   * Get aggregations
+  /**
+   * Get aggregations.
    * @return aggregations
-  **/
+   **/
   @ApiModelProperty(value = "")
-  public java.util.List<Aggregation> getAggregations() {
+  public java.util.List<Object> getAggregations() {
     return aggregations;
   }
 
-  public void setAggregations(java.util.List<Aggregation> aggregations) {
+  /**
+   * setAggregations.
+   **/
+  public void setAggregations(java.util.List<Object> aggregations) {
     this.aggregations = aggregations;
   }
 
+
+  /**
+   * queryScope.
+   *
+   * @return WebQuery
+   **/
   public WebQuery queryScope(QueryScopeEnum queryScope) {
     this.queryScope = queryScope;
     return this;
   }
 
-   /**
-   * Get queryScope
+  /**
+   * Get queryScope.
    * @return queryScope
-  **/
+   **/
   @ApiModelProperty(value = "")
   public QueryScopeEnum getQueryScope() {
     return queryScope;
   }
 
+  /**
+   * setQueryScope.
+   **/
   public void setQueryScope(QueryScopeEnum queryScope) {
     this.queryScope = queryScope;
   }
 
-  public WebQuery queryScopeId(java.util.UUID queryScopeId) {
+
+  /**
+   * queryScopeId.
+   *
+   * @return WebQuery
+   **/
+  public WebQuery queryScopeId(String queryScopeId) {
     this.queryScopeId = queryScopeId;
     return this;
   }
 
-   /**
-   * Get queryScopeId
+  /**
+   * Get queryScopeId.
    * @return queryScopeId
-  **/
+   **/
   @ApiModelProperty(value = "")
-  public java.util.UUID getQueryScopeId() {
+  public String getQueryScopeId() {
     return queryScopeId;
   }
 
-  public void setQueryScopeId(java.util.UUID queryScopeId) {
+  /**
+   * setQueryScopeId.
+   **/
+  public void setQueryScopeId(String queryScopeId) {
     this.queryScopeId = queryScopeId;
   }
 
 
+  /**
+   * Compares objects.
+   *
+   * @return true or false depending on comparison result.
+   */
   @Override
   public boolean equals(java.lang.Object o) {
     if (this == o) {
@@ -168,12 +214,18 @@ public class WebQuery {
         Objects.equals(this.queryScopeId, webQuery.queryScopeId);
   }
 
+  /**
+   * Returns the HashCode.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(filters, aggregations, queryScope, queryScopeId);
   }
 
 
+  /**
+   * Converts the given object to string.
+   */
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
