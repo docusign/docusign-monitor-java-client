@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 import com.migcomponents.migbase64.Base64;
 
-import javax.ws.rs.core.UriBuilderException;
+import jakarta.ws.rs.core.UriBuilderException;
 
 /**
  *
