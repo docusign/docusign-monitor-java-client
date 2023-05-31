@@ -5,8 +5,7 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * AggregateResultResult.
@@ -35,7 +34,7 @@ public class AggregateResultResult {
    * Get name.
    * @return name
    **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public String getName() {
     return name;
   }
@@ -65,7 +64,7 @@ public class AggregateResultResult {
    **/
   public AggregateResultResult addDataItem(Object dataItem) {
     if (this.data == null) {
-      this.data = new java.util.ArrayList<Object>();
+      this.data = new java.util.ArrayList<>();
     }
     this.data.add(dataItem);
     return this;
@@ -75,7 +74,7 @@ public class AggregateResultResult {
    * Get data.
    * @return data
    **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public java.util.List<Object> getData() {
     return data;
   }

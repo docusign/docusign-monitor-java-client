@@ -6,8 +6,7 @@ import com.docusign.monitor.model.AggregateResultResult;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * AggregateResult.
@@ -36,7 +35,7 @@ public class AggregateResult {
    **/
   public AggregateResult addResultItem(AggregateResultResult resultItem) {
     if (this.result == null) {
-      this.result = new java.util.ArrayList<AggregateResultResult>();
+      this.result = new java.util.ArrayList<>();
     }
     this.result.add(resultItem);
     return this;
@@ -46,7 +45,7 @@ public class AggregateResult {
    * Get result.
    * @return result
    **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public java.util.List<AggregateResultResult> getResult() {
     return result;
   }

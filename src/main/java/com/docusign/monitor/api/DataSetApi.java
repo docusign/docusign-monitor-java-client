@@ -1,13 +1,14 @@
 
 package com.docusign.monitor.api;
 
-import javax.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.GenericType;
 
 import com.docusign.monitor.client.ApiException;
 import com.docusign.monitor.client.ApiClient;
 import com.docusign.monitor.client.Configuration;
 import com.docusign.monitor.model.*;
 import com.docusign.monitor.client.Pair;
+import com.docusign.monitor.client.ApiResponse;
 
 
 
@@ -64,7 +65,7 @@ public class DataSetApi {
   {
   private String cursor = null;
   private Integer limit = null;
-
+  
  /**
   * setCursor method.
   */
@@ -80,7 +81,7 @@ public class DataSetApi {
   public String getCursor() {
     return this.cursor;
   }
-
+  
  /**
   * setLimit method.
   */
@@ -104,7 +105,7 @@ public class DataSetApi {
    * @param version The requested API version (required)
    * @param dataSetName The name of the dataset to stream (required)
    * @return CursoredResult
-   */
+   */ 
   public CursoredResult getStream(String version, String dataSetName) throws ApiException {
     return getStream(version, dataSetName, null);
   }
@@ -119,18 +120,32 @@ public class DataSetApi {
    * @throws ApiException if fails to make API call
    */
   public CursoredResult getStream(String version, String dataSetName, DataSetApi.GetStreamOptions options) throws ApiException {
-    Object localVarPostBody = "{}";
+    ApiResponse<CursoredResult> localVarResponse = getStreamWithHttpInfo(version, dataSetName, options);
+    return localVarResponse.getData();
+  }
 
+  /**
+   * 
+   * Allows for the streaming of data as it becomes available  Required scopes: impersonation
+   * @param version The requested API version (required)
+   * @param dataSetName The name of the dataset to stream (required)
+   * @param options for modifying the method behavior.
+   * @return CursoredResult
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<CursoredResult > getStreamWithHttpInfo(String version, String dataSetName, DataSetApi.GetStreamOptions options) throws ApiException {
+    Object localVarPostBody = "{}";
+    
     // verify the required parameter 'version' is set
     if (version == null) {
       throw new ApiException(400, "Missing the required parameter 'version' when calling getStream");
     }
-
+    
     // verify the required parameter 'dataSetName' is set
     if (dataSetName == null) {
       throw new ApiException(400, "Missing the required parameter 'dataSetName' when calling getStream");
     }
-
+    
     // create path and map variables
     String localVarPath = "/api/v{version}/datasets/{dataSetName}/stream"
       .replaceAll("\\{" + "version" + "\\}", apiClient.escapeString(version.toString()))
@@ -148,9 +163,9 @@ public class DataSetApi {
       localVarQueryParams.addAll(apiClient.parameterToPair("limit", options.limit));
     }
 
+    
 
-
-
+    
 
     final String[] localVarAccepts = {
       "application/json"
@@ -162,11 +177,12 @@ public class DataSetApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "docusignAccessCode" };
-
+    String[] localVarAuthNames = new String[] {  };
+    
     GenericType<CursoredResult> localVarReturnType = new GenericType<CursoredResult>() {};
-    return apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-      }
+    CursoredResult localVarResponse = apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    return new ApiResponse<CursoredResult>(apiClient.getStatusCode(), apiClient.getResponseHeaders(), localVarResponse);
+  }
 
   /**
    * .
@@ -178,23 +194,37 @@ public class DataSetApi {
    * @throws ApiException if fails to make API call
    */
   public AggregateResult postWebQuery(String version, String dataSetName, WebQuery webQuery) throws ApiException {
-    Object localVarPostBody = webQuery;
+    ApiResponse<AggregateResult> localVarResponse = postWebQueryWithHttpInfo(version, dataSetName, webQuery);
+    return localVarResponse.getData();
+  }
 
+  /**
+   * 
+   * Allows for querying existing data using filter and aggregation clauses  Required scopes: impersonation
+   * @param version The requested API version (required)
+   * @param dataSetName The name of the dataset to query (required)
+   * @param webQuery A collection of filter clauses and aggregations scoped to one or more organizations. The fields queryScope and queryScopeId may be omitted defaulting to all applicable organizations (required)
+   * @return AggregateResult
+   * @throws ApiException if fails to make API call
+   */
+  public ApiResponse<AggregateResult > postWebQueryWithHttpInfo(String version, String dataSetName, WebQuery webQuery) throws ApiException {
+    Object localVarPostBody = webQuery;
+    
     // verify the required parameter 'version' is set
     if (version == null) {
       throw new ApiException(400, "Missing the required parameter 'version' when calling postWebQuery");
     }
-
+    
     // verify the required parameter 'dataSetName' is set
     if (dataSetName == null) {
       throw new ApiException(400, "Missing the required parameter 'dataSetName' when calling postWebQuery");
     }
-
+    
     // verify the required parameter 'webQuery' is set
     if (webQuery == null) {
       throw new ApiException(400, "Missing the required parameter 'webQuery' when calling postWebQuery");
     }
-
+    
     // create path and map variables
     String localVarPath = "/api/v{version}/datasets/{dataSetName}/web_query"
       .replaceAll("\\{" + "version" + "\\}", apiClient.escapeString(version.toString()))
@@ -206,11 +236,11 @@ public class DataSetApi {
     java.util.Map<String, String> localVarHeaderParams = new java.util.HashMap<String, String>();
     java.util.Map<String, Object> localVarFormParams = new java.util.HashMap<String, Object>();
 
+    
 
+    
 
-
-
-
+    
 
     final String[] localVarAccepts = {
       "application/json"
@@ -222,9 +252,10 @@ public class DataSetApi {
     };
     final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
 
-    String[] localVarAuthNames = new String[] { "docusignAccessCode" };
-
+    String[] localVarAuthNames = new String[] {  };
+    
     GenericType<AggregateResult> localVarReturnType = new GenericType<AggregateResult>() {};
-    return apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-      }
+    AggregateResult localVarResponse = apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
+    return new ApiResponse<AggregateResult>(apiClient.getStatusCode(), apiClient.getResponseHeaders(), localVarResponse);
+  }
 }

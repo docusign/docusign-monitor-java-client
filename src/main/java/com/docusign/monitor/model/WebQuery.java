@@ -5,8 +5,7 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * WebQuery.
@@ -77,7 +76,7 @@ public class WebQuery {
    **/
   public WebQuery addFiltersItem(Object filtersItem) {
     if (this.filters == null) {
-      this.filters = new java.util.ArrayList<Object>();
+      this.filters = new java.util.ArrayList<>();
     }
     this.filters.add(filtersItem);
     return this;
@@ -87,7 +86,7 @@ public class WebQuery {
    * Get filters.
    * @return filters
    **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public java.util.List<Object> getFilters() {
     return filters;
   }
@@ -117,7 +116,7 @@ public class WebQuery {
    **/
   public WebQuery addAggregationsItem(Object aggregationsItem) {
     if (this.aggregations == null) {
-      this.aggregations = new java.util.ArrayList<Object>();
+      this.aggregations = new java.util.ArrayList<>();
     }
     this.aggregations.add(aggregationsItem);
     return this;
@@ -127,7 +126,7 @@ public class WebQuery {
    * Get aggregations.
    * @return aggregations
    **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public java.util.List<Object> getAggregations() {
     return aggregations;
   }
@@ -154,7 +153,7 @@ public class WebQuery {
    * Get queryScope.
    * @return queryScope
    **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public QueryScopeEnum getQueryScope() {
     return queryScope;
   }
@@ -181,7 +180,7 @@ public class WebQuery {
    * Get queryScopeId.
    * @return queryScopeId
    **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public String getQueryScopeId() {
     return queryScopeId;
   }

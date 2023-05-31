@@ -5,8 +5,8 @@ import java.util.Arrays;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * RawRequest
@@ -68,7 +68,7 @@ public class RawRequest {
    * Get queryScope
    * @return queryScope
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public QueryScopeEnum getQueryScope() {
     return queryScope;
   }
@@ -86,7 +86,7 @@ public class RawRequest {
    * Get queryScopeId
    * @return queryScopeId
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public java.util.UUID getQueryScopeId() {
     return queryScopeId;
   }
@@ -104,7 +104,7 @@ public class RawRequest {
    * Get query
    * @return query
   **/
-  @ApiModelProperty(value = "")
+  @Schema(description = "")
   public String getQuery() {
     return query;
   }

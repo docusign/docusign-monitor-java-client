@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.core.Response;
 
 import com.docusign.monitor.client.ApiException;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -20,9 +20,9 @@ import org.apache.oltu.oauth2.common.token.BasicOAuthToken;
 
 import com.docusign.monitor.client.Pair;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import javax.ws.rs.client.Client;
+import jakarta.ws.rs.client.Client;
 
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
  * OAuth class.
@@ -270,7 +270,7 @@ public class OAuth implements Authentication {
          *
          * @return accessToken
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getAccessToken() {
             return accessToken;
         }
@@ -289,7 +289,7 @@ public class OAuth implements Authentication {
          *
          * @return tokenType
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getTokenType() {
             return tokenType;
         }
@@ -308,7 +308,7 @@ public class OAuth implements Authentication {
          *
          * @return refreshToken
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getRefreshToken() {
             return refreshToken;
         }
@@ -327,7 +327,7 @@ public class OAuth implements Authentication {
          *
          * @return expiresIn
          **/
-        @ApiModelProperty(example = "3600L", value = "0L")
+        @Schema(example = "3600L", description = "0L")
         public Long getExpiresIn() {
             return expiresIn;
         }
@@ -405,7 +405,7 @@ public class OAuth implements Authentication {
          *
          * @return rel
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getRel() {
             return rel;
         }
@@ -424,7 +424,7 @@ public class OAuth implements Authentication {
          *
          * @return href
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getHref() {
             return href;
         }
@@ -498,7 +498,7 @@ public class OAuth implements Authentication {
          *
          * @return organizationId
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getOrganizationId() {
             return organizationId;
         }
@@ -522,7 +522,7 @@ public class OAuth implements Authentication {
          *
          * @return links
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public java.util.List<Link> getLinks() {
             return links;
         }
@@ -610,7 +610,7 @@ public class OAuth implements Authentication {
          *
          * @return accountId
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getAccountId() {
             return accountId;
         }
@@ -629,7 +629,7 @@ public class OAuth implements Authentication {
          *
          * @return isDefault
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getIsDefault() {
             return isDefault;
         }
@@ -648,7 +648,7 @@ public class OAuth implements Authentication {
          *
          * @return accountName
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getAccountName() {
             return accountName;
         }
@@ -667,7 +667,7 @@ public class OAuth implements Authentication {
          *
          * @return baseUri
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getBaseUri() {
             return baseUri;
         }
@@ -686,7 +686,7 @@ public class OAuth implements Authentication {
          *
          * @return organization
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public Organization getOrganization() {
             return organization;
         }
@@ -789,7 +789,7 @@ public class OAuth implements Authentication {
          *
          * @return sub
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getSub() {
             return sub;
         }
@@ -808,7 +808,7 @@ public class OAuth implements Authentication {
          *
          * @return email
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getEmail() {
             return email;
         }
@@ -832,7 +832,7 @@ public class OAuth implements Authentication {
          *
          * @return accounts
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public java.util.List<Account> getAccounts() {
             return accounts;
         }
@@ -851,7 +851,7 @@ public class OAuth implements Authentication {
          *
          * @return name
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getName() {
             return name;
         }
@@ -870,7 +870,7 @@ public class OAuth implements Authentication {
          *
          * @return givenName
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getGivenName() {
             return givenName;
         }
@@ -889,7 +889,7 @@ public class OAuth implements Authentication {
          *
          * @return familyName
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getFamilyName() {
             return familyName;
         }
@@ -908,7 +908,7 @@ public class OAuth implements Authentication {
          *
          * @return created
          **/
-        @ApiModelProperty(example = "null", value = "")
+        @Schema(example = "null", description = "")
         public String getCreated() {
             return created;
         }

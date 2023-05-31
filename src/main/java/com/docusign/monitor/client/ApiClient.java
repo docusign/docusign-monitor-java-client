@@ -23,10 +23,10 @@ import org.glassfish.jersey.logging.LoggingFeature;
 import org.glassfish.jersey.media.multipart.*;
 
 import javax.net.ssl.*;
-import javax.ws.rs.client.*;
-import javax.ws.rs.core.*;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.core.Response.Status.Family;
+import jakarta.ws.rs.client.*;
+import jakarta.ws.rs.core.*;
+import jakarta.ws.rs.core.Response.Status;
+import jakarta.ws.rs.core.Response.Status.Family;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -41,6 +41,7 @@ import org.glassfish.jersey.logging.LoggingFeature;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.security.NoSuchAlgorithmException;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.Map.Entry;
@@ -59,11 +60,11 @@ public class ApiClient {
   protected Map<String, String> defaultHeaderMap = new HashMap<String, String>();
   // Rest API base path constants
   /** live/production base path. */
-  public final static String PRODUCTION_REST_BASEPATH = "https://lens.docusign.net";
+  public final static String PRODUCTION_REST_BASEPATH = "https://www.docusign.net/restapi";
   /** sandbox/demo base path. */
-  public final static String DEMO_REST_BASEPATH = "https://lens-d.docusign.net";
+  public final static String DEMO_REST_BASEPATH = "https://demo.docusign.net/restapi";
   /** stage base path. */
-  public final static String STAGE_REST_BASEPATH = "https://lens-s.docusign.net";
+  public final static String STAGE_REST_BASEPATH = "https://stage.docusign.net/restapi";
 
   private String basePath = PRODUCTION_REST_BASEPATH;
   private String oAuthBasePath = OAuth.PRODUCTION_OAUTH_BASEPATH;
@@ -92,9 +93,10 @@ public class ApiClient {
     httpClient = buildHttpClient(debugging);
 
     this.dateFormat = new RFC3339DateFormat();
+    String javaVersion = System.getProperty("java.version");
 
     // Set default User-Agent.
-    setUserAgent("Swagger-Codegen/1.1.0/java");
+    setUserAgent("/SDK/1.3.0/Java/");
 
     // Setup authentications (key: authentication name, value: authentication).
     authentications = new HashMap<String, Authentication>();
@@ -193,7 +195,7 @@ public class ApiClient {
 
   /**
    * Set the object mapper of client.
-   *
+   * 
    * @return API client
    */
   public ApiClient setObjectMapper(ObjectMapper objectMapper) {
@@ -213,7 +215,7 @@ public class ApiClient {
 
   /**
    * Gets the API client.
-   *
+   * 
    * @return Client
    */
   public Client getHttpClient() {
@@ -222,7 +224,7 @@ public class ApiClient {
 
   /**
    * Sets the API client.
-   *
+   * 
    * @return ApiClient
    */
   public ApiClient setHttpClient(Client httpClient) {
@@ -232,7 +234,7 @@ public class ApiClient {
 
   /**
    * Gets the basepath.
-   *
+   * 
    * @return String
    */
   public String getBasePath() {
@@ -241,7 +243,7 @@ public class ApiClient {
 
   /**
    * Sets the basepath.
-   *
+   * 
    * @return ApiClient
    */
   public ApiClient setBasePath(String basePath) {
@@ -355,7 +357,7 @@ public class ApiClient {
       if (auth instanceof OAuth) {
         try {
           ((OAuth) auth).updateAccessToken();
-        } catch (ApiException e) {
+        } catch (ApiException e) { 
           throw new RuntimeException(e.getMessage());
         }
         return;
@@ -383,7 +385,7 @@ public class ApiClient {
 
   /**
    * Gets the access token.
-   *
+   * 
    * @return String
    */
   public String getAccessToken() {
@@ -487,7 +489,7 @@ public class ApiClient {
   public int getReadTimeout() {
     return readTimeout;
   }
-
+  
   /**
    * Set the read timeout (in milliseconds).
    * A value of 0 means no timeout, otherwise values must be between 1 and
@@ -629,9 +631,9 @@ public class ApiClient {
   private void deriveOAuthBasePathFromRestBasePath() {
     if (this.basePath == null) { // this case should not happen but just in case
       this.oAuthBasePath = OAuth.PRODUCTION_OAUTH_BASEPATH;
-    } else if (this.basePath.startsWith("https://lens-d") || this.basePath.startsWith("http://lens-d")) {
+    } else if (this.basePath.startsWith("https://demo") || this.basePath.startsWith("http://demo")) {
       this.oAuthBasePath = OAuth.DEMO_OAUTH_BASEPATH;
-    } else if (this.basePath.startsWith("https://lens-s") || this.basePath.startsWith("http://lens-s")) {
+    } else if (this.basePath.startsWith("https://stage") || this.basePath.startsWith("http://stage")) {
       this.oAuthBasePath = OAuth.STAGE_OAUTH_BASEPATH;
     } else {
       this.oAuthBasePath = OAuth.PRODUCTION_OAUTH_BASEPATH;
@@ -672,7 +674,7 @@ public class ApiClient {
 
       Client client = buildHttpClient(debugging);
       WebTarget target = client.target("https://" + getOAuthBasePath() + "/oauth/token");
-
+      
       Invocation.Builder invocationBuilder = target.request();
       invocationBuilder = invocationBuilder
               .header("Authorization", "Basic " + Base64.encodeToString(clientStr.getBytes("UTF-8"), false))
@@ -832,12 +834,12 @@ public class ApiClient {
             .header("Pragma", "no-cache");
 
     Entity<?> entity = serialize(null, form, MediaType.APPLICATION_FORM_URLENCODED);
-
+  
     Response response = null;
-
+  
     try {
       response = invocationBuilder.post(entity);
-
+  
       if (response.getStatusInfo().getFamily() != Family.SUCCESSFUL) {
         String message = "error";
         String respBody = null;
@@ -1080,7 +1082,7 @@ public class ApiClient {
 
     return params;
   }
-
+  
   /**
    * Format to {@code Pair} objects.
    * @param collectionFormat Collection format
@@ -1242,11 +1244,11 @@ public class ApiClient {
       MultiPart multiPart = new MultiPart();
       for (Entry<String, Object> param: formParams.entrySet()) {
         if (param.getValue() instanceof byte[]) {
-          byte[] bytes = (byte[]) param.getValue();
+          byte[] bytes = (byte[]) param.getValue();	
           FormDataContentDisposition contentDisp = FormDataContentDisposition.name(param.getKey())
-              .fileName(param.getKey()).size(bytes.length).build();
+              .fileName(param.getKey()).size(bytes.length).build();	
 
-          multiPart.bodyPart(new FormDataBodyPart(contentDisp, bytes, MediaType.APPLICATION_OCTET_STREAM_TYPE));
+          multiPart.bodyPart(new FormDataBodyPart(contentDisp, bytes, MediaType.APPLICATION_OCTET_STREAM_TYPE));	
         } else if (param.getValue() instanceof File) {
           File file = (File) param.getValue();
           FormDataContentDisposition contentDisp = FormDataContentDisposition.name(param.getKey())
@@ -1298,7 +1300,7 @@ public class ApiClient {
 
     String contentType = null;
     List<Object> contentTypes = response.getHeaders().get("Content-Type");
-    if (contentTypes != null && !contentTypes.isEmpty()) {
+    if (contentTypes != null && !contentTypes.isEmpty()) { 
       contentType = String.valueOf(contentTypes.get(0));
     }
 
@@ -1334,7 +1336,7 @@ public class ApiClient {
       // Get filename from the Content-Disposition header.
       Pattern pattern = Pattern.compile("filename=['\"]?([^'\"\\s]+)['\"]?");
       Matcher matcher = pattern.matcher(contentDisposition);
-      if (matcher.find()) {
+      if (matcher.find()) { 
         filename = matcher.group(1);
       }
     }
@@ -1358,10 +1360,10 @@ public class ApiClient {
       }
     }
 
-    if (tempFolderPath == null) {
+    if (tempFolderPath == null) { 
       return File.createTempFile(prefix, suffix);
     }
-    else {
+    else { 
       return File.createTempFile(prefix, suffix, new File(tempFolderPath));
     }
   }
@@ -1429,30 +1431,30 @@ public class ApiClient {
 
     Entity<?> entity = (body == null && formParams.isEmpty()) ? Entity.json("{}") : serialize(body, formParams, contentType);
 
-    // Generate and add Content-Disposition header as per RFC 6266
-    if (contentType.startsWith("multipart/form-data")) {
-      for (Entry<String, Object> param : formParams.entrySet()) {
-        if (param.getValue() instanceof byte[]) {
-          MultiPart mp = ((MultiPart) entity.getEntity());
-          List<BodyPart> bodyParts = mp.getBodyParts();
-          if (!bodyParts.isEmpty()) {
-            BodyPart bodyPart = bodyParts.get(0);
-            if (bodyPart.getContentDisposition() != null) {
-              String contentDispositionValue = bodyPart.getContentDisposition().toString();
-              invocationBuilder = invocationBuilder.header("Content-Disposition", contentDispositionValue);
-              entity = Entity.entity(param.getValue(), "application/octet-stream");
-            }
-          }
-        }
-      }
+    // Generate and add Content-Disposition header as per RFC 6266	
+    if (contentType.startsWith("multipart/form-data")) {	
+      for (Entry<String, Object> param : formParams.entrySet()) {	
+        if (param.getValue() instanceof byte[]) {	
+          MultiPart mp = ((MultiPart) entity.getEntity());	
+          List<BodyPart> bodyParts = mp.getBodyParts();	
+          if (!bodyParts.isEmpty()) {	
+            BodyPart bodyPart = bodyParts.get(0);	
+            if (bodyPart.getContentDisposition() != null) {	
+              String contentDispositionValue = bodyPart.getContentDisposition().toString();	
+              invocationBuilder = invocationBuilder.header("Content-Disposition", contentDispositionValue);	
+              entity = Entity.entity(param.getValue(), "application/octet-stream");	
+            }	
+          }	
+        }	
+      }	
     }
 
     // Add DocuSign Tracking Header
     invocationBuilder = invocationBuilder.header("X-DocuSign-SDK", "Java");
 
     if (body == null && formParams.isEmpty()) {
-        invocationBuilder = invocationBuilder.header("Content-Length", "0");
-    }
+        invocationBuilder = invocationBuilder.header("Content-Length", "0");	
+    }	
 
     Response response = null;
     String message = "error";
@@ -1497,10 +1499,10 @@ public class ApiClient {
       if (response.getStatus() == Status.NO_CONTENT.getStatusCode()) {
         return null;
       } else if (response.getStatusInfo().getFamily() == Status.Family.SUCCESSFUL) {
-        if (returnType == null) {
+        if (returnType == null) { 
           return null;
         }
-        else {
+        else { 
           return deserialize(response, returnType);
         }
       } else {
@@ -1555,7 +1557,7 @@ public class ApiClient {
     return encodedFormParams;
   }
 
-
+  
 
   /**
    * Encode the given request object in CSV format.
@@ -1601,7 +1603,7 @@ public class ApiClient {
             System.out.println(e);
         } catch (IllegalArgumentException e) {
             System.out.println(e);
-        } catch (InvocationTargetException e) {
+        } catch (InvocationTargetException e) { 
             System.out.println(e);
         }
       }
@@ -1634,11 +1636,16 @@ public class ApiClient {
     }
     performAdditionalClientConfiguration(clientConfig);
 
-    // Force TLS v1.2
+    // Check for required TLS v1.2
     try {
-    	System.setProperty("https.protocols", "TLSv1.2");
+        String[] supportedProtocols = SSLContext.getDefault().createSSLEngine().getEnabledProtocols();
+        if (!Arrays.asList(supportedProtocols).contains("TLSv1.2")) {
+            throw new SecurityException("Docusign Java SDK requires TLSv1.2 Protocol");
+        }
     } catch (SecurityException se) {
-        System.err.println("failed to set https.protocols property");
+        System.err.println(se.getMessage());
+    } catch (NoSuchAlgorithmException nsae) {
+        System.err.println(nsae.getMessage());
     }
 
     // Setup the SSLContext object to use for HTTPS connections to the API
@@ -1688,7 +1695,7 @@ public class ApiClient {
       }
 
       @Override
-      public Connector getConnector(Client client, javax.ws.rs.core.Configuration configuration) {
+      public Connector getConnector(Client client, jakarta.ws.rs.core.Configuration configuration) {
         HttpUrlConnectorProvider customConnProv =  new HttpUrlConnectorProvider();
         customConnProv.connectionFactory(new HttpUrlConnectorProvider.ConnectionFactory() {
             @Override
@@ -1696,13 +1703,13 @@ public class ApiClient {
                 if (url == null) {
                   return null;
                 }
-
+        
                 if (isNonProxyHost(url.getHost(), System.getProperty("http.nonProxyHosts"))) {
                   HttpsURLConnection connection = (HttpsURLConnection) url.openConnection(Proxy.NO_PROXY);
                   connection.setSSLSocketFactory(sslContext.getSocketFactory());
                   return connection;
                 }
-
+        
                 // set up the proxy/no-proxy settings
                 if (p == null) {
                   if (System.getProperty("https.proxyHost") != null) {
@@ -1753,7 +1760,7 @@ public class ApiClient {
                     p = Proxy.NO_PROXY;
                   }
                 }
-
+        
                 HostnameVerifier allHostsValid = new InsecureHostnameVerifier();
                 HttpsURLConnection connection = (HttpsURLConnection) url.openConnection(p);
                 connection.setSSLSocketFactory(sslContext.getSocketFactory());
@@ -1773,7 +1780,7 @@ public class ApiClient {
   protected void performAdditionalClientConfiguration(ClientConfig clientConfig) {
     // No-op extension point
   }
-
+  
   class InsecureHostnameVerifier implements HostnameVerifier {
     @Override
     public boolean verify(String hostname, SSLSession session) {
