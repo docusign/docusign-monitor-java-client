@@ -8,12 +8,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 /**
- * .
+ * Methods to fetch organization event data..
  *
  */
-@Schema(description = "")
+@Schema(description = "Methods to fetch organization event data.")
 
-public class CursoredResult {
+public class DataSet {
   @JsonProperty("endCursor")
   private String endCursor = null;
 
@@ -24,9 +24,9 @@ public class CursoredResult {
   /**
    * endCursor.
    *
-   * @return CursoredResult
+   * @return DataSet
    **/
-  public CursoredResult endCursor(String endCursor) {
+  public DataSet endCursor(String endCursor) {
     this.endCursor = endCursor;
     return this;
   }
@@ -51,9 +51,9 @@ public class CursoredResult {
   /**
    * data.
    *
-   * @return CursoredResult
+   * @return DataSet
    **/
-  public CursoredResult data(java.util.List<Object> data) {
+  public DataSet data(java.util.List<Object> data) {
     this.data = data;
     return this;
   }
@@ -61,9 +61,9 @@ public class CursoredResult {
   /**
    * addDataItem.
    *
-   * @return CursoredResult
+   * @return DataSet
    **/
-  public CursoredResult addDataItem(Object dataItem) {
+  public DataSet addDataItem(Object dataItem) {
     if (this.data == null) {
       this.data = new java.util.ArrayList<>();
     }
@@ -101,9 +101,9 @@ public class CursoredResult {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    CursoredResult cursoredResult = (CursoredResult) o;
-    return Objects.equals(this.endCursor, cursoredResult.endCursor) &&
-        Objects.equals(this.data, cursoredResult.data);
+    DataSet dataSet = (DataSet) o;
+    return Objects.equals(this.endCursor, dataSet.endCursor) &&
+        Objects.equals(this.data, dataSet.data);
   }
 
   /**
@@ -121,7 +121,7 @@ public class CursoredResult {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class CursoredResult {\n");
+    sb.append("class DataSet {\n");
     
     sb.append("    endCursor: ").append(toIndentedString(endCursor)).append("\n");
     sb.append("    data: ").append(toIndentedString(data)).append("\n");

@@ -54,7 +54,7 @@ public class DataSetApi {
   }
 
   /// <summary>
-  ///  Allows for the streaming of data as it becomes available  Required scopes: impersonation
+  /// Gets customer event data for an organization. Gets customer event data for the organization that owns the integration key.  The results for this endpoint are paginated by event timestamp. Use the &#x60;cursor&#x60; parameter to specify where the query begins in the dataset. Use the &#x60;limit&#x60; parameter to set the number of records returned. 
   /// </summary>
 
  /**
@@ -100,10 +100,10 @@ public class DataSetApi {
   }
 
    /**
-   * .
-   * Allows for the streaming of data as it becomes available  Required scopes: impersonation
-   * @param version The requested API version (required)
-   * @param dataSetName The name of the dataset to stream (required)
+   * Gets customer event data for an organization..
+   * Gets customer event data for the organization that owns the integration key.  The results for this endpoint are paginated by event timestamp. Use the &#x60;cursor&#x60; parameter to specify where the query begins in the dataset. Use the &#x60;limit&#x60; parameter to set the number of records returned. 
+   * @param version Must be &#x60;2&#x60;.  (required)
+   * @param dataSetName Must be &#x60;monitor&#x60;. (required)
    * @return CursoredResult
    */ 
   public CursoredResult getStream(String version, String dataSetName) throws ApiException {
@@ -111,10 +111,10 @@ public class DataSetApi {
   }
 
   /**
-   * .
-   * Allows for the streaming of data as it becomes available  Required scopes: impersonation
-   * @param version The requested API version (required)
-   * @param dataSetName The name of the dataset to stream (required)
+   * Gets customer event data for an organization..
+   * Gets customer event data for the organization that owns the integration key.  The results for this endpoint are paginated by event timestamp. Use the &#x60;cursor&#x60; parameter to specify where the query begins in the dataset. Use the &#x60;limit&#x60; parameter to set the number of records returned. 
+   * @param version Must be &#x60;2&#x60;.  (required)
+   * @param dataSetName Must be &#x60;monitor&#x60;. (required)
    * @param options for modifying the method behavior.
    * @return CursoredResult
    * @throws ApiException if fails to make API call
@@ -125,10 +125,10 @@ public class DataSetApi {
   }
 
   /**
-   * 
-   * Allows for the streaming of data as it becomes available  Required scopes: impersonation
-   * @param version The requested API version (required)
-   * @param dataSetName The name of the dataset to stream (required)
+   * Gets customer event data for an organization.
+   * Gets customer event data for the organization that owns the integration key.  The results for this endpoint are paginated by event timestamp. Use the &#x60;cursor&#x60; parameter to specify where the query begins in the dataset. Use the &#x60;limit&#x60; parameter to set the number of records returned. 
+   * @param version Must be &#x60;2&#x60;.  (required)
+   * @param dataSetName Must be &#x60;monitor&#x60;. (required)
    * @param options for modifying the method behavior.
    * @return CursoredResult
    * @throws ApiException if fails to make API call
@@ -182,80 +182,5 @@ public class DataSetApi {
     GenericType<CursoredResult> localVarReturnType = new GenericType<CursoredResult>() {};
     CursoredResult localVarResponse = apiClient.invokeAPI(localVarPath, "GET", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
     return new ApiResponse<CursoredResult>(apiClient.getStatusCode(), apiClient.getResponseHeaders(), localVarResponse);
-  }
-
-  /**
-   * .
-   * Allows for querying existing data using filter and aggregation clauses  Required scopes: impersonation
-   * @param version The requested API version (required)
-   * @param dataSetName The name of the dataset to query (required)
-   * @param webQuery A collection of filter clauses and aggregations scoped to one or more organizations. The fields queryScope and queryScopeId may be omitted defaulting to all applicable organizations (required)
-   * @return AggregateResult
-   * @throws ApiException if fails to make API call
-   */
-  public AggregateResult postWebQuery(String version, String dataSetName, WebQuery webQuery) throws ApiException {
-    ApiResponse<AggregateResult> localVarResponse = postWebQueryWithHttpInfo(version, dataSetName, webQuery);
-    return localVarResponse.getData();
-  }
-
-  /**
-   * 
-   * Allows for querying existing data using filter and aggregation clauses  Required scopes: impersonation
-   * @param version The requested API version (required)
-   * @param dataSetName The name of the dataset to query (required)
-   * @param webQuery A collection of filter clauses and aggregations scoped to one or more organizations. The fields queryScope and queryScopeId may be omitted defaulting to all applicable organizations (required)
-   * @return AggregateResult
-   * @throws ApiException if fails to make API call
-   */
-  public ApiResponse<AggregateResult > postWebQueryWithHttpInfo(String version, String dataSetName, WebQuery webQuery) throws ApiException {
-    Object localVarPostBody = webQuery;
-    
-    // verify the required parameter 'version' is set
-    if (version == null) {
-      throw new ApiException(400, "Missing the required parameter 'version' when calling postWebQuery");
-    }
-    
-    // verify the required parameter 'dataSetName' is set
-    if (dataSetName == null) {
-      throw new ApiException(400, "Missing the required parameter 'dataSetName' when calling postWebQuery");
-    }
-    
-    // verify the required parameter 'webQuery' is set
-    if (webQuery == null) {
-      throw new ApiException(400, "Missing the required parameter 'webQuery' when calling postWebQuery");
-    }
-    
-    // create path and map variables
-    String localVarPath = "/api/v{version}/datasets/{dataSetName}/web_query"
-      .replaceAll("\\{" + "version" + "\\}", apiClient.escapeString(version.toString()))
-      .replaceAll("\\{" + "dataSetName" + "\\}", apiClient.escapeString(dataSetName.toString()));
-
-    // query params
-    java.util.List<Pair> localVarQueryParams = new java.util.ArrayList<Pair>();
-    java.util.List<Pair> localVarCollectionQueryParams = new java.util.ArrayList<Pair>();
-    java.util.Map<String, String> localVarHeaderParams = new java.util.HashMap<String, String>();
-    java.util.Map<String, Object> localVarFormParams = new java.util.HashMap<String, Object>();
-
-    
-
-    
-
-    
-
-    final String[] localVarAccepts = {
-      "application/json"
-    };
-    final String localVarAccept = apiClient.selectHeaderAccept(localVarAccepts);
-
-    final String[] localVarContentTypes = {
-      "application/json"
-    };
-    final String localVarContentType = apiClient.selectHeaderContentType(localVarContentTypes);
-
-    String[] localVarAuthNames = new String[] {  };
-    
-    GenericType<AggregateResult> localVarReturnType = new GenericType<AggregateResult>() {};
-    AggregateResult localVarResponse = apiClient.invokeAPI(localVarPath, "POST", localVarQueryParams, localVarCollectionQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams, localVarAccept, localVarContentType, localVarAuthNames, localVarReturnType);
-    return new ApiResponse<AggregateResult>(apiClient.getStatusCode(), apiClient.getResponseHeaders(), localVarResponse);
   }
 }
