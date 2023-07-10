@@ -5,7 +5,7 @@
     <artifactId>docusign-monitor-java</artifactId>
     <packaging>jar</packaging>
     <name>docusign-monitor-java</name>
-    <version>1.3.0</version>
+    <version>1.4.0</version>
     <url>https://developers.docusign.com</url>
     <description>The official DocuSign Monitor Java client provides libraries for Java application integration with DocuSign Monitor for real estate and mortgage workflows. It is recommended that you use this version of the library for new development.</description>
 

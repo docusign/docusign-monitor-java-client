@@ -1,6 +1,11 @@
 # DocuSign Monitor Java Client Changelog
 See [DocuSign Support Center](https://support.docusign.com/en/releasenotes/) for Product Release Notes.
 
+## [v1.4.0] - Monitor API v2.0-2.0.0 - 2023-06-14
+### Changed
+- Added support for version v2.0-2.0.0 of the DocuSign Monitor API.
+- Updated the SDK release version.
+
 ## [v1.3.0] - Monitor API v2.0-1.1.0 - 2023-05-30
 ### Changed
 - Added support for version v2.0-1.1.0 of the DocuSign Monitor API.
