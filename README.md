@@ -1,88 +1,167 @@
-# The Official DocuSign Monitor Java Client
+# The Official Docusign Monitor Java Client SDK
 
 [![Build status][travis-image]][travis-url]
 [![Maven Central status][maven-image]][maven-url]
 
-## Requirements
+The Docusign SDK makes integrating Docusign into your apps and websites a seamless experience.
 
-- Java 1.9+
-- Free [Developer Sandbox](https://go.docusign.com/sandbox/productshot/?elqCampaignId=16531)
+## Table of Contents
+- [Introduction](#introduction)
+- [Installation](#installation)
+	* [Version Information](#versionInformation)
+	* [Requirements](#requirements)
+	* [Compatibility](#compatibility)
+	* [Maven](#maven)	
+- [Dependencies](#dependencies)
+- [API Reference](#apiReference)
+- [Code Examples](#codeExamples)
+- [OAuth Implementations](#oauthImplementations)
+- [Security](#security)
+- [Changelog](#changeLog)
+- [Support](#support)
+- [License](#license)
+- [Additional Resources](#additionalResources)
 
-## Compatibility
+<a id="introduction"></a>
+## Introduction
+Docusign Monitor helps organizations protect their agreements with round-the-clock activity tracking. The Monitor API delivers this activity tracking information directly to existing security stacks or data visualization tools—enabling teams to detect unauthorized activity, investigate incidents, and quickly respond to verified threats. It also provides the flexibility security teams need to customize dashboards and alerts to meet specific business needs.
 
-- Java 1.9+
-
-## Note
-
-This open-source SDK is provided for cases where you would like to make additional changes that the SDK does not
- provide out-of-the-box. If you simply want to use the SDK with any of the examples shown in the [Developer Center ](https://developers.docusign.com/monitor-api/code-examples), follow the installation instructions below.
-
+<a id="installation"></a>
 ## Installation
+This client SDK is provided as open source, which enables you to customize its functionality to suit your particular use case. To do so, download or clone the repository. If the SDK’s given functionality meets your integration needs, or if you’re working through our [code examples](https://developers.docusign.com/docs/monitor-api/how-to/) from the [Docusign Developer Center](https://developers.docusign.com/), you merely need to install it by following the instructions below.
 
-Note: DocuSign uses **Eclipse** with **Maven** for testing purposes.
+<a id="versionInformation"></a>
+### Version Information
+- **API version**: v3.0
+- **Latest SDK version (Including prerelease)**: 
 
+<a id="requirements"></a>
+## Requirements
+*   Java 1.9+
+*   Free [developer account](https://go.docusign.com/o/sandbox/?postActivateUrl=https://developers.docusign.com/)
+
+<a id="compatibility"></a>
+## Compatibility
+*   Java 1.9+
+
+<a id="maven"></a>
+**Note:** Docusign uses Eclipse with Maven for testing purposes.
 ### Maven:
-
-1. In Eclipse, create a new project by selecting **File** -> **New** -> **Project**.
-2. In the **New Project Wizard** , expand **Maven** , then select **Maven Project.**
+1. In Eclipse, create a new project by selecting **File > New > Project**.
+2. In the New Project Wizard, expand **Maven,** then select **Maven Project.**
 3. Leave **Create a simple project** unchecked.
-4. Select **Next** , then provide a unique **Group** and **Artifact Id**.
-5. In the directory where you've saved your project, open the _pom.xml_ file.
-6. In the _pom.xml_ file, locate the **dependencies** node.
-7. Add:
+4. Select **Next,** then provide a unique **groupId** and **artifactId.**
+5. In the directory where you've saved your project, open the pom.xml file.
+6. In the pom.xml file, locate the `dependencies` node.
+7. Add:  
+    ```
+    <dependency>
+      <groupId>com.docusign</groupId>
+      <artifactId>docusign-monitor-java</artifactId>
+      <version>2.0.0</version>
+    </dependency>
+    ```
+8. If your project is still open, restart Eclipse.
 
-```
-<dependency>
-  <groupId>com.docusign</groupId>
-  <artifactId>docusign-monitor-java</artifactId>
-  <version>1.1.0</version>
-</dependency>
-```
-
-8. If your project is still open, restart **Eclipse**.
-
-## Dependencies
-
+<a id="dependencies"></a>
+## SDK Dependencies
 This client has the following external dependencies:
+*   io.swagger.core.v3:swagger-annotations:2.2.8
+*   org.glassfish.jersey.core:jersey-client:3.1.6
+*   org.glassfish.jersey.media:jersey-media-multipart:3.1.6
+*   org.glassfish.jersey.media:jersey-media-json-jackson:3.1.6
+*   org.glassfish.jersey.inject:jersey-hk2:3.1.6
+*   com.fasterxml.jackson.jakarta.rs:jackson-jakarta-rs-base:2.14.2
+*   com.auth0:java-jwt:3.4.1
+*   org.bouncycastle:bcprov-jdk18on:1.78.1
+*   com.fasterxml.jackson.dataformat:jackson-dataformat-csv:2.14.2
+*   com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2
+*   com.brsanthu:migbase64:2.2
+*   com.fasterxml.jackson.core:jackson-core:2.17.1
+*   org.json:json:20240303
 
-- io.swagger:swagger-annotations:jar:1.5.17
-- org.glassfish.jersey.core:jersey-client:jar:2.29.1
-- org.glassfish.jersey.media:jersey-media-multipart:jar:2.29.1
-- org.glassfish.jersey.media:jersey-media-json-jackson:2.29.1
-- com.fasterxml.jackson.core:jackson-core:jar:2.10.1
-- com.fasterxml.jackson.core:jackson-annotations:jar:2.10.1
-- com.fasterxml.jackson.core:jackson-databind:2.10.1
-- com.fasterxml.jackson.datatype:jackson-datatype-joda:jar:2.10.1
-- com.brsanthu:migbase64:2.2
-- junit:junit:jar:4.12
-- com.apache.oltu.oauth2:org.apache.oltu.oauth2.client:1.0.2
-- com.auth0:java-jwt:3.4.1
-- org.bouncycastle:bcprov-jdk15on:1.60
 
-## OAuth Implementations
+<a id="apiReference"></a>
+## API Reference
+You can refer to the API reference [here](https://developers.docusign.com/docs/monitor-api/reference/).
 
-For details regarding which type of OAuth grant will work best for your DocuSign integration, see the [REST API
- Authentication Overview](https://developers.docusign.com/monitor-api/guides/auth) guide located on the [DocuSign Developer Center](https://developers.docusign.com/).
+<a id="codeExamples"></a>
+## Code examples
+Explore our GitHub repository for the [Launcher](https://github.com/docusign/code-examples-java/), a self-executing package housing code examples for the Monitor Java SDK. This package showcases several common use cases and their respective source files. Additionally, you can download a version preconfigured for your Docusign developer account from [Quickstart](https://developers.docusign.com/docs/esign-rest-api/quickstart/). These examples support both the [Authorization Code Grant](https://developers.docusign.com/platform/auth/authcode/) and [JSON Web Token (JWT)](https://developers.docusign.com/platform/auth/jwt/) authentication workflows.
 
-For security purposes, DocuSign recommends using the Authorization Code Grant flow.
+<a id="oauthImplementations"></a>
+## OAuth implementations
+For details regarding which type of OAuth grant will work best for your Docusign integration, see [Choose OAuth Type](https://developers.docusign.com/platform/auth/choose/) in the [Docusign Developer Center](https://developers.docusign.com/).
 
+For security purposes, Docusign recommends using the [Authorization Code Grant](https://developers.docusign.com/platform/auth/authcode/) flow.
+
+<a id="security"></a>
+## Security
+
+This SDK enforces secure-by-default transport behavior:
+
+*   **TLS certificate validation** is enforced by default using the system's trust store and default `HostnameVerifier`.
+*   **HTTPS-only base paths** — `setBasePath()` and the `ApiClient(String basePath)` constructor reject `http://` URLs by default.
+*   **OAuth base path validation** — `setOAuthBasePath()` also enforces HTTPS.
+*   **TLS 1.2 required** — The SDK fails fast if TLSv1.2 is not available on the JVM.
+
+### Testing with self-signed certificates or HTTP endpoints
+
+For local development or testing scenarios that require HTTP or self-signed certificates, use the explicit `ApiClient.insecure()` factory:
+
+```java
+// HTTP endpoint for local testing
+ApiClient client = ApiClient.insecure("http://localhost:8080/restapi");
+
+// Self-signed certificate
+ApiClient client = ApiClient.insecure("https://dev-server.local/restapi");
+
+// Insecure client with default base path
+ApiClient client = ApiClient.insecure();
+client.setBasePath("http://localhost:8080/restapi");
+```
+
+> **Warning:** `ApiClient.insecure()` disables TLS certificate validation and hostname verification. Never use in production.
+
+### Proxy authentication
+
+By default, when proxy credentials are set via system properties (`https.proxyUser` / `https.proxyPassword`), the SDK configures a JVM-wide `Authenticator` scoped to the proxy host and port. This preserves backward compatibility with existing enterprise configurations.
+
+If you prefer per-connection proxy authentication (which avoids JVM-global side effects), enable it via the setter before the first request:
+
+```java
+ApiClient client = new ApiClient();
+client.setPerConnectionProxyAuth(true);
+```
+
+Or use the convenience constructor:
+
+```java
+ApiClient client = new ApiClient(true);
+```
+
+> **Note:** Per-connection proxy auth will become the default in a future major version.
+
+<a id="changeLog"></a>
+## Changelog
+You can refer to the complete changelog [here](https://github.com/docusign/docusign-monitor-java-client/blob/master/CHANGELOG.md).
+
+<a id="support"></a>
 ## Support
+Log issues against this client SDK through GitHub. You can also reach out to us through [Docusign Community](https://community.docusign.com/developer-59) and [Stack Overflow](https://stackoverflow.com/questions/tagged/docusignapi).
 
-Log issues against this client through GitHub. We also have an [active developer community on Stack Overflow](https://stackoverflow.com/questions/tagged/docusignapi).
-
+<a id="license"></a>
 ## License
+The Docusign Monitor Java Client SDK is licensed under the [MIT License](https://github.com/docusign/docusign-monitor-java-client/blob/master/LICENSE).
 
-The DocuSign Java Client is licensed under the [MIT License](https://github.com/docusign/docusign-monitor-java-client/blob
-/master/LICENSE).
+<a id="additionalResources"></a>
+### Additional resources
+*   [Docusign Developer Center](https://developers.docusign.com/)
+*   [Docusign API on Twitter](https://twitter.com/docusignapi)
+*   [Docusign For Developers on LinkedIn](https://www.linkedin.com/showcase/docusign-for-developers/)
+*   [Docusign For Developers on YouTube](https://www.youtube.com/channel/UCJSJ2kMs_qeQotmw4-lX2NQ)
 
-
-[travis-image]: https://img.shields.io/travis/docusign/docusign-monitor-java-client.svg?style=flat
-[travis-url]: https://travis-ci.org/docusign/docusign-monitor-java-client
-[maven-image]: https://img.shields.io/maven-central/v/com.docusign/docusign-monitor-java.svg?style=flat
+[travis-image]: https://api.travis-ci.com/docusign/docusign-monitor-java-client.svg?branch=master
+[travis-url]: https://app.travis-ci.com/github/docusign/docusign-monitor-java-client
+[maven-image]: https://img.shields.io/maven-central/v/com.docusign/.svg?style=flat
 [maven-url]: https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22com.docusign%22
-
-### Additional Resources
-* [DocuSign Developer Center](https://developers.docusign.com)
-* [DocuSign API on Twitter](https://twitter.com/docusignapi)
-* [DocuSign For Developers on LinkedIn](https://www.linkedin.com/showcase/docusign-for-developers/)
-* [DocuSign For Developers on YouTube](https://www.youtube.com/channel/UCJSJ2kMs_qeQotmw4-lX2NQ)

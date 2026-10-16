@@ -3,13 +3,16 @@ import com.docusign.monitor.client.*;
 import com.docusign.monitor.client.auth.OAuth;
 import com.docusign.monitor.client.auth.OAuth.UserInfo;
 
-import com.docusign.monitor.model.CursoredResult;
+import com.docusign.monitor.model.StreamResponse;
 import org.junit.*;
 import org.junit.runners.MethodSorters;
 
 //import java.awt.*;
 //import java.net.URI;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.UUID;
 
 import com.migcomponents.migbase64.Base64;
 
@@ -29,7 +32,7 @@ public class SdkUnitTests {
 	//private static final String ClientSecret = System.getenv("CLIENT_SECRET");
 	//private static final String RedirectURI = System.getenv("REDIRECT_URI");
 
-	private static final String BaseUrl = ApiClient.DEMO_REST_BASEPATH;
+	private static final String BaseUrl = "https://api-d.docusign.com";
 	//private static final String OAuthBaseUrl = OAuth.DEMO_OAUTH_BASEPATH;
     private static final byte[] privateKeyBytes = Base64.decode(System.getenv("PRIVATE_KEY"));
 	// JUnit 4.12 runs test cases in parallel, so the envelope ID needs to be initiated as well.
@@ -57,6 +60,7 @@ public class SdkUnitTests {
 	public void JWTLoginTest() {
 		System.out.println("\nJWTLoginTest:\n" + "===========================================");
 		ApiClient apiClient = new ApiClient(BaseUrl);
+		apiClient.setOAuthBasePath(OAuth.DEMO_OAUTH_BASEPATH);
 		//String currentDir = System.getenv("user.dir");
 
 		try {
@@ -95,6 +99,7 @@ public class SdkUnitTests {
 	public void AuthorizationCodeLoginTest() {
 		System.out.println("\nAuthorizationCodeLoginTest:\n" + "===========================================");
 		ApiClient apiClient = new ApiClient(BaseUrl);
+		apiClient.setOAuthBasePath(OAuth.DEMO_OAUTH_BASEPATH);
 		try {
 			// after successful login you should compare the value of URI decoded "state" query param
 			// with the one you create here; they should match.
@@ -175,6 +180,7 @@ public class SdkUnitTests {
 	public void GetStreamTest() {
 		System.out.println("\nGetStreamTest:\n" + "===========================================");
 		ApiClient apiClient = new ApiClient(BaseUrl);
+		apiClient.setOAuthBasePath(OAuth.DEMO_OAUTH_BASEPATH);
 		//String currentDir = System.getProperty("user.dir");
 
 		try {
@@ -205,13 +211,24 @@ public class SdkUnitTests {
 			
 			Configuration.setDefaultApiClient(apiClient);
 
-			DataSetApi dataSetApi = new DataSetApi();
-			String dataSetName = "monitor";
-			String version = "2.0";
-			CursoredResult cursoredResult = dataSetApi.getStream(version, dataSetName);
-			Assert.assertNotNull(cursoredResult.getData());
+			String organizationId = null;
+			for (OAuth.Account account : userInfo.getAccounts()) {
+				if (account.getOrganization() != null && account.getOrganization().getOrganizationId() != null) {
+					organizationId = account.getOrganization().getOrganizationId();
+					break;
+				}
+			}
+			Assert.assertNotNull(organizationId);
 
-			System.out.println("CursoredResult - first row: " + cursoredResult.getData().get(0));
+			DocuMonitorApi docuMonitorApi = new DocuMonitorApi();
+			DocuMonitorApi.StreamOptions streamOptions = docuMonitorApi.new StreamOptions();
+			streamOptions.setCursor(Instant.now().minus(24, ChronoUnit.HOURS).truncatedTo(ChronoUnit.SECONDS).toString());
+			streamOptions.setLimit(100);
+			StreamResponse streamResponse = docuMonitorApi.stream(UUID.fromString(organizationId), streamOptions);
+			Assert.assertNotNull(streamResponse);
+			Assert.assertNotNull(streamResponse.getEndCursor());
+
+			System.out.println("StreamResponse end cursor: " + streamResponse.getEndCursor());
 		} catch (ApiException ex) {
 			Assert.fail("ApiException: " + ex.getLocalizedMessage());
 		} catch (Exception e) {
